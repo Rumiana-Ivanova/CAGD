@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> CADG project </title>
+	<script type="text/javascript" src="code.js"> </script>
+	<style type="text/css">
+
+		#adding {
+		  -webkit-border-radius: 28;
+		  -moz-border-radius: 28;
+		  border-radius: 28px;
+		  font-family: Arial;
+		  color: #ffffff;
+		  font-size: 16px;
+		  background: #3cd934;
+		  padding: 8px 20px 8px 20px;
+		  text-decoration: none;
+		  position:fixed;
+		  left:800px;
+		  top:30px;
+		}
+
+		#adding:hover {
+		  background: #3cb0fd;
+		  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+		  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+		  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+		  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+		  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+		  text-decoration: none;
+		}
+
+
+		#draw_control_polygon {
+		  -webkit-border-radius: 28;
+		  -moz-border-radius: 28;
+		  border-radius: 28px;
+		  font-family: Arial;
+		  color: #ffffff;
+		  font-size: 16px;
+		  background: #3cd934;
+		  padding: 8px 20px 8px 20px;
+		  text-decoration: none;
+		  position:fixed;
+		  left:800px;
+		  top:80px;
+		}
+
+		#draw_control_polygon:hover {
+		  background: #3cb0fd;
+		  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+		  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+		  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+		  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+		  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+		  text-decoration: none;
+		}
+
+		#draw_curve {
+		  -webkit-border-radius: 28;
+		  -moz-border-radius: 28;
+		  border-radius: 28px;
+		  font-family: Arial;
+		  color: #ffffff;
+		  font-size: 16px;
+		  background: #3cd934;
+		  padding: 8px 20px 8px 20px;
+		  text-decoration: none;
+		  position:fixed;
+		  left:800px;
+		  top:130px;
+		}
+
+		#draw_curve:hover {
+		  background: #3cb0fd;
+		  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+		  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+		  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+		  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+		  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+		  text-decoration: none;
+		}
+
+		#draw_parametric {
+		  -webkit-border-radius: 28;
+		  -moz-border-radius: 28;
+		  border-radius: 28px;
+		  font-family: Arial;
+		  color: #ffffff;
+		  font-size: 16px;
+		  background: #3cd934;
+		  padding: 8px 20px 8px 20px;
+		  text-decoration: none;
+		  position:fixed;
+		  left:800px;
+		  top:180px;
+		}
+
+		#draw_parametric:hover {
+		  background: #3cb0fd;
+		  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+		  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+		  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+		  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+		  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+		  text-decoration: none;
+		}
+
+		#clear {
+		  -webkit-border-radius: 28;
+		  -moz-border-radius: 28;
+		  border-radius: 28px;
+		  font-family: Arial;
+		  color: #ffffff;
+		  font-size: 16px;
+		  background: #3cd934;
+		  padding: 8px 20px 8px 20px;
+		  text-decoration: none;
+		  position:fixed;
+		  left:800px;
+		  top:230px;
+		}
+
+		#clear:hover {
+		  background: #3cb0fd;
+		  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+		  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+		  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+		  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+		  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+		  text-decoration: none;
+		}
+	</style>
+
+</head>
+
+<body onload="start()">
+	<canvas id = "canvas" width = "720" height = "720" style="border:1px solid #000000;">
+	</canvas>
+
+	<button id = "adding" type = "button" onclick="toggleControlPointsAddingState(true)"> Start adding control points </button>
+	<button id = "draw_control_polygon" type = "button" onclick="toggledrawControlPolygons()"> Draw contol polygon </button>
+	<button id = "draw_curve" type = "button" onclick="toggledrawBezieCurve()"> Draw curve from control points </button>
+	<button id = "draw_parametric" type = "button" onclick=" toggledrawParametricFunction()"> Draw parametric functions </button>
+	<button id = "clear" type = "button" onclick="clearCanvas(true)"> Clear </button>
+
+</body>
+</html> 
