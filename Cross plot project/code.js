@@ -33,7 +33,8 @@ function start()
 		return;
 	}
 
-	ctx = canvas.getContext("2d");
+	//ctx = canvas.getContext ("2d", "webgl2", { antialias: true, alpha: true, premultipliedAlpha: true });
+    ctx = canvas.getContext ("2d", "webgl2", { antialias: true, alpha: false});
 	if (!ctx)
 	{
 		alert("Cannot load context!");
@@ -62,7 +63,7 @@ function handleMouseClick(event)
 		calculatePointsOfParametricFunctionsX(controlPoints);
 		calculatePointsOfParametricFunctionsY(controlPoints);
 	}
-	redrawCanvas();
+	redrawCanvas(false);
 	//drawControlPoint(point);
 }
 
@@ -102,7 +103,7 @@ function handleMouseMove(event)
 	controlPoints[movingControlPointIndex] = point;
 	calculatePointsOfParametricFunctionsX(controlPoints);
 	calculatePointsOfParametricFunctionsY(controlPoints);
-	redrawCanvas();
+	redrawCanvas(false);
 }
 
 
@@ -132,9 +133,9 @@ function drawControlPoints(points)
 	}
 }
 
-function redrawCanvas()
+function redrawCanvas(resetPoints)
 {
-	clearCanvas(false);
+	clearCanvas(resetPoints);
 	if (controlPoints.length > 0)
 	{
 		drawControlPoints(controlPoints);
@@ -182,7 +183,7 @@ function drawCircle(center, radius)
 {
 	ctx.beginPath();
 	ctx.arc(center.x, center.y, radius, 0, 2 * Math.PI, false);
-	ctx.lineWidth = 2;
+	ctx.lineWidth = controlPointRaduis;
 	ctx.fillStyle = "blue";
 	ctx.fill();
 	ctx.strokeStyle = "blue";
@@ -191,7 +192,7 @@ function drawCircle(center, radius)
 
 function toggledrawControlPolygons(){
 	drawingControlPolygons = !drawingControlPolygons;
-	redrawCanvas(true);
+	redrawCanvas(false);
 }
 
 function drawControlPolygons(){
@@ -281,7 +282,7 @@ function drawAxesArrow(x, y, changeX, dir){
 
 function toggledrawParametricFunction(){
 	drawingParametricFunctions = !drawingParametricFunctions;
-	redrawCanvas(true);
+	redrawCanvas(false);
 }
 
 
@@ -366,7 +367,7 @@ function drawCurve (points) {
 
 function toggledrawBezieCurve(){
 	drawingBezieCurves = !drawingBezieCurves;
-	redrawCanvas(true);
+	redrawCanvas(false);
 }
 
 function drawBezieCurve (){
@@ -374,7 +375,7 @@ function drawBezieCurve (){
 	if(!drawingBezieCurves){
 		return;
 	}
-	var segments = 100;
+	var segments = controlPoints.length * 10;
 
 	if(controlPoints.length > 0){
 		drawCurve(calculatePointWithDeCasteljausAlgorithm(0, 1, segments, controlPoints));
