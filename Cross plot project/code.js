@@ -64,7 +64,7 @@ function handleMouseClick(event)
 		calculatePointsOfParametricFunctionsY(controlPoints);
 	}
 	redrawCanvas(false);
-	//drawControlPoint(point);
+
 }
 
 function handleMouseDown(event)
@@ -144,7 +144,6 @@ function redrawCanvas(resetPoints)
 		drawBezieCurve();
 	}
 
-	redrawLine();
 }	
 
 
@@ -169,8 +168,6 @@ function toggleControlPointsAddingState()
 function setControlPointsAddingStatesActive(active)
 {
 	addingControlPoints = active;
-	if (addingControlPoints)
-		controlPoints = [];
 
     var button = document.getElementById("adding");
     if (addingControlPoints)
@@ -251,6 +248,12 @@ function drawAxes(){
 	ctx.stroke();
 	drawAxesArrow(width/2, height/2 - axesLenght/2, false, 1);
 	drawAxesArrow(width/2, height/2 + axesLenght/2, false, -1);
+
+	var size = 10;
+	drawX (width/2 + axesLenght/2 + size , height/2 - size/2, size);
+	drawY (width/2 - size/2, height/2 - axesLenght/2 - size*2, size);
+	drawT (width/2 - axesLenght/2 - size*2, height/2 - size/2, size);
+	drawT (width/2 - size/2, height/2 + axesLenght/2 + size, size);
 }
 
 function drawAxesArrow(x, y, changeX, dir){
@@ -280,6 +283,45 @@ function drawAxesArrow(x, y, changeX, dir){
 
 }
 
+function drawX (x, y, size){
+	ctx.beginPath();
+	ctx.strokeStyle = "black";
+	ctx.lineWidth = axesWidth;
+
+	ctx.moveTo(x, y);
+	ctx.lineTo(x + size, y + size);
+	ctx.stroke();
+	ctx.moveTo(x + size, y);
+	ctx.lineTo(x, y + size);
+	ctx.stroke();
+}
+
+function drawY (x, y, size){
+	ctx.beginPath();
+	ctx.strokeStyle = "black";
+	ctx.lineWidth = axesWidth;
+
+	ctx.moveTo(x, y);
+	ctx.lineTo(x + size/2, y + size/2);
+	ctx.stroke();
+	ctx.moveTo(x + size, y);
+	ctx.lineTo(x, y + size);
+	ctx.stroke();
+}
+
+function drawT (x, y, size){
+	ctx.beginPath();
+	ctx.strokeStyle = "black";
+	ctx.lineWidth = axesWidth;
+
+	ctx.moveTo(x, y);
+	ctx.lineTo(x + size, y);
+	ctx.stroke();
+	ctx.moveTo(x + size/2, y);
+	ctx.lineTo(x + size/2, y + size);
+	ctx.stroke();
+}
+
 function toggledrawParametricFunction(){
 	drawingParametricFunctions = !drawingParametricFunctions;
 	redrawCanvas(false);
@@ -299,8 +341,8 @@ function drawParametricFunctions(points){
 function calculatePointsOfParametricFunctionsX(points){
 
 	var n = points.length-1;
-	var a = canvas.width/2 - axesLenght/2;
-	var b = canvas.width/2 - axesLenght*0.1;
+	var b = canvas.width/2 - axesLenght/2;
+	var a = canvas.width/2 - axesLenght*0.05;
 	controlPointsX = [];
 	
 	for(var i = 0; i <= n; i++){
@@ -312,7 +354,7 @@ function calculatePointsOfParametricFunctionsX(points){
 function calculatePointsOfParametricFunctionsY(points){
 	
 	var n = points.length-1;
-	var a = canvas.height/2 + axesLenght*0.1;
+	var a = canvas.height/2 + axesLenght*0.05;
 	var b = canvas.height/2 + axesLenght/2;
 	controlPointsY = [];
 
