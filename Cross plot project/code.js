@@ -34,7 +34,7 @@ function start()
 	}
 
 	//ctx = canvas.getContext ("2d", "webgl2", { antialias: true, alpha: true, premultipliedAlpha: true });
-    ctx = canvas.getContext ("2d", "webgl2", { antialias: true, alpha: false});
+    ctx = canvas.getContext ("2d", "webgl2", { antialias: true});
 	if (!ctx)
 	{
 		alert("Cannot load context!");
