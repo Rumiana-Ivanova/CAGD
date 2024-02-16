@@ -6,7 +6,7 @@ const curveWidth = 2;
 var addingControlPoints = false;
 var drawingControlPolygons = false;
 var drawingBezieCurves = false;
-var drawingParametricFunctions = false;
+var drawingCoordinateFunctions = false;
 var controlPoints = [];
 var controlPointsX = [];
 var controlPointsY = [];
@@ -34,7 +34,7 @@ function start()
 	}
 
 	//ctx = canvas.getContext ("2d", "webgl2", { antialias: true, alpha: true, premultipliedAlpha: true });
-    ctx = canvas.getContext ("2d", "webgl2", { antialias: true});
+    ctx = canvas.getContext ("2d", "webgl2", { antialias: true, alpha: false});
 	if (!ctx)
 	{
 		alert("Cannot load context!");
@@ -59,9 +59,9 @@ function handleMouseClick(event)
 
 	var point = mousePoint(event);
 	controlPoints.push(point);
-	if(drawingParametricFunctions){
-		calculatePointsOfParametricFunctionsX(controlPoints);
-		calculatePointsOfParametricFunctionsY(controlPoints);
+	if(drawingCoordinateFunctions){
+		calculatePointsOfCoordinateFunctionsX(controlPoints);
+		calculatePointsOfCoordinateFunctionsY(controlPoints);
 	}
 	redrawCanvas(false);
 
@@ -101,8 +101,8 @@ function handleMouseMove(event)
 
 	var point = mousePoint(event);
 	controlPoints[movingControlPointIndex] = point;
-	calculatePointsOfParametricFunctionsX(controlPoints);
-	calculatePointsOfParametricFunctionsY(controlPoints);
+	calculatePointsOfCoordinateFunctionsX(controlPoints);
+	calculatePointsOfCoordinateFunctionsY(controlPoints);
 	redrawCanvas(false);
 }
 
@@ -139,7 +139,7 @@ function redrawCanvas(resetPoints)
 	if (controlPoints.length > 0)
 	{
 		drawControlPoints(controlPoints);
-		drawParametricFunctions(controlPoints);
+		drawCoordinateFunctions(controlPoints);
 		drawControlPolygons();
 		drawBezieCurve();
 	}
@@ -200,7 +200,7 @@ function drawControlPolygons(){
 		drawControlPolygon(controlPoints);
 	}
 
-	if(!drawingParametricFunctions){
+	if(!drawingCoordinateFunctions){
 		return;
 	}
 	if(controlPointsX.length > 0){
@@ -322,23 +322,23 @@ function drawT (x, y, size){
 	ctx.stroke();
 }
 
-function toggledrawParametricFunction(){
-	drawingParametricFunctions = !drawingParametricFunctions;
+function toggledrawCoordinateFunction(){
+	drawingCoordinateFunctions = !drawingCoordinateFunctions;
 	redrawCanvas(false);
 }
 
 
-function drawParametricFunctions(points){
-	if(!drawingParametricFunctions){
+function drawCoordinateFunctions(points){
+	if(!drawingCoordinateFunctions){
 		return;
 	}
-	calculatePointsOfParametricFunctionsX(points)
+	calculatePointsOfCoordinateFunctionsX(points)
 	drawControlPoints(controlPointsX);
-	calculatePointsOfParametricFunctionsY(points)
+	calculatePointsOfCoordinateFunctionsY(points)
 	drawControlPoints(controlPointsY);
 }
 
-function calculatePointsOfParametricFunctionsX(points){
+function calculatePointsOfCoordinateFunctionsX(points){
 
 	var n = points.length-1;
 	var b = canvas.width/2 - axesLenght/2;
@@ -351,7 +351,7 @@ function calculatePointsOfParametricFunctionsX(points){
 
 }
 
-function calculatePointsOfParametricFunctionsY(points){
+function calculatePointsOfCoordinateFunctionsY(points){
 	
 	var n = points.length-1;
 	var a = canvas.height/2 + axesLenght*0.05;
@@ -423,7 +423,7 @@ function drawBezieCurve (){
 		drawCurve(calculatePointWithDeCasteljausAlgorithm(0, 1, segments, controlPoints));
 	}
 	
-	if(!drawingParametricFunctions){
+	if(!drawingCoordinateFunctions){
 		return;
 	}
 	if(controlPointsX.length > 0){
